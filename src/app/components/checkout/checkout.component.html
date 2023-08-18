@@ -46,8 +46,13 @@
 
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
-                  <option>TO DO</option>
+                <select
+                  formControlName="country"
+                  (change)="getStates('shippingAddress')"
+                >
+                  <option *ngFor="let country of countries" [ngValue]="country">
+                    {{ country.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -79,7 +84,12 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option>To Do</option>
+                  <option
+                    *ngFor="let state of shippingAddressStates"
+                    [ngValue]="state"
+                  >
+                    {{ state.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -116,8 +126,10 @@
 
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
-                  <option>TO DO</option>
+                <select formControlName="country" (change)="getStates('billingAddress')">
+                  <option *ngFor="let country of countries" [ngValue]="country">
+                    {{ country.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -149,7 +161,12 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option>To Do</option>
+                  <option
+                    *ngFor="let state of billingAddressStates"
+                    [ngValue]="state"
+                  >
+                    {{ state.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -177,6 +194,7 @@
                 <select formControlName="cardType">
                   <option>Visa</option>
                   <option>Mastercard</option>
+                  <option>American Express</option>
                 </select>
               </div>
             </div>
@@ -213,38 +231,43 @@
           </div>
 
           <div class="row">
-            <div class="col-md-2"><label>Expiration Month</label></div>
+            <div class="col-md-2"><label>Expiration Year</label></div>
 
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="expirationMonth">
-                  <option>TO D0</option>
+                <select
+                  formControlName="expirationYear"
+                  (change)="handleMonthsAndYears()"
+                >
+                  <option *ngFor="let year of creditCardYears">
+                    {{ year }}
+                  </option>
                 </select>
               </div>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-md-2"><label>Expiration Year</label></div>
+            <div class="col-md-2"><label>Expiration Month</label></div>
 
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="expirationYear">
-                  <option>TO D0</option>
+                <select formControlName="expirationMonth">
+                  <option *ngFor="let month of creditCardMonths">
+                    {{ month }}
+                  </option>
                 </select>
               </div>
             </div>
           </div>
-
         </div>
-        
+
         <!-- order details -->
         <div class="form-area">
-            <h3>Review Your Order</h3>
-            <p>Total Quantity: {{ totalQuantity }}</p>
-            <p>Shipping: FREE</p>
-            <p>Total Price: {{ totalPrice }}</p>
-
+          <h3>Review Your Order</h3>
+          <p>Total Quantity: {{ totalQuantity }}</p>
+          <p>Shipping: FREE</p>
+          <p>Total Price: {{ totalPrice }}</p>
         </div>
         <!-- submit button -->
         <div class="text-center">
