@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../common/cart-item';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +9,14 @@ export class CartService {
   
   cartItems: CartItem[] = [];
 
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantity: Subject<number> = new Subject<number>();
+  // totalPrice: Subject<number> = new ReplaySubject<number>(); // if you wanted all the total updates to be replayed to a class instantiated later 
+
+  // BehaviorSubject just gives the last value not a stream of all the totals
+  // 0 is initial value 
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
+
+
 
   constructor() {}
 
